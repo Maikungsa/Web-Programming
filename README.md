@@ -1,2 +1,2 @@
 # Web-Programming
-This repository contains all assignment from Web Programming Course
+This repository contains all assignments from Web Programming Course
