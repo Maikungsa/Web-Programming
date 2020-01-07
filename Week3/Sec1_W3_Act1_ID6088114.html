@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <title>ID:6088114</title>
+    <style>
+        th {
+            font-size: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="summited.html" method="GET">
+        <table border="1px" style="background:rgb(255, 216, 222)">
+            <th colspan="2">Please fill in your personal info
+            </th>
+            <tr>
+                <td align="center">ID: </td>
+                <td><input type="text" name="ID" pattern="[0-9]{7}" placeholder="ID"></td>
+            </tr>
+            <tr>
+                <td align="center">Firstname: </td>
+                <td><input type="text" name="--firstname--" pattern="[a-zA-Z]+" placeholder="Firstname"></td>
+            </tr>
+            <tr>
+                <td align="center">Surname: </td>
+                <td><input type="text" name="--lastname--" pattern="[a-zA-Z]+" placeholder="Surname"></td>
+            </tr>
+            <tr>
+                <td align="center">Birthday: </td>
+                <td><input type="date" name="date"></td>
+            </tr>
+            <tr>
+                <td align="center">Gender: </td>
+                <td><input type="radio" value="male" name="sex">Male
+                    <input type="radio" value="female" name="sex">Female
+                </td>
+            </tr>
+            <tr>
+                <td align="center">Hobbies: </td>
+                <td>
+                    <input type="checkbox" value="football" name="hobbies">Football<br>
+                    <input type="checkbox" value="computergames" name="hobbies">Computer Games<br>
+                    <input type="checkbox" value="diving" name="hobbies">Diving<br>
+                    <input type="checkbox" value="karaoke" name="hobbies">Karaoke
+                </td>
+            </tr>
+            <tr>
+                <td align="center">My email:</td>
+                <td>
+                    <input type="email" name="email" placeholder="your email">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" >
+                    <center><input type="submit" value="Submit"></center>
+                </td>
+                
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>
