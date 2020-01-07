@@ -1,0 +1,6 @@
+{
+    "host":"localhost", 
+    "user":"restuser", 
+    "password":"rest", 
+    "database":"restdb"
+}

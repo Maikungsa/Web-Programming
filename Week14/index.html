@@ -1,0 +1,62 @@
+<html>
+
+<head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <title>6088114</title>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+             * element that contains the map. */
+        #map {
+              height: 100%;
+            }
+            /* Optional: Makes the sample page fill the window. */
+        html, body {
+              height: 100%;
+              margin: 0;
+              padding: 0;
+            }
+    </style>
+</head>
+
+<body>
+    <label for="placeId">Input place id</label>
+    <input type="text" name="placId" id="placeId">
+    <input type="submit" name="send" id="getResult">
+    <div id="map"></div>
+    <div id="output"></div>
+    <script>
+        var searchURL = "http://localhost/Week14/index.php";
+        $(document).ready(function () {
+            $("#getResult").click(function () {
+                var query = $("#placeId").val();
+                $.getJSON(searchURL, {
+                    id: query,
+                    action: "get"
+                }, function (jd) {
+                    $("#output").html('<p>' + JSON.stringify(jd) + '</p>');
+                    console.log(jd.data[0].placelat);
+                    initMap(jd.data[0].placelat,jd.data[0].placelong);
+                });
+            });
+        });
+        function initMap(lat,long) {
+            var myLatLng = {
+                lat: parseFloat(lat),
+                lng: parseFloat(long)
+            };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 20,
+                center: myLatLng
+            });
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map,
+                title: 'Hello World!'
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDq6A415CI3zO1mL1sA8CRPZX--VrRz-kA"></script>
+</body>
+
+</html>
