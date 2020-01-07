@@ -1,0 +1,145 @@
+<style>
+    #dice {
+        font-size: 4.6rem;
+    }
+    
+    div {
+        text-align: center;
+    }
+    
+    .numberInput {
+        width: 100px;
+        height: 40px;
+        font-size: 20px;
+        text-align: center;
+    }
+    
+    .box {
+        display: box;
+        height: 1000px;
+        display: -moz-box;
+        -moz-box-orient: horizontal;
+        display: -webkit-box;
+        -webkit-box-orient: horizontal;
+        display: box;
+        box-orient: horizontal;
+    }
+    
+    .box .column1 {
+        -moz-box-flex: 1.0;
+        -webkit-box-flex: 1.0;
+        -ms-flex: 1.0;
+        box-flex: 1.0;
+        background: #FDF3E7;
+    }
+    
+    .box .column2 {
+        -moz-box-flex: 1.0;
+        -webkit-box-flex: 1.0;
+        -ms-flex: 1.0;
+        box-flex: 1.0;
+    }
+    
+    #searchResult {
+        font-size: 1.5rem;
+        text-align: left;
+        padding-left: 30px
+    }
+</style>
+<div class="box">
+    <div class="column1">
+        <br />
+        <h1>Dice Roller</h1>
+
+        <h2>Please input number of round</h2>
+        <input type="number" min="1" value="1" class="numberInput" id="roundInput">
+        <input id="rollbtn" type="button" class="numberInput" value="Roll">
+        <div id="dice"></div>
+    </div>
+    <div class="column2">
+        <br />
+        <h1>Search</h1>
+        <h2>Please input #round to search</h2>
+        <input type="number" min="1" value="1" class="numberInput" id="Yay">
+        <input type="button" class="numberInput" value="Search" id="roundSearch">
+        <div id="searchResult"></div>
+    </div>
+</div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //Use JQuery to get value from HTML elements
+        //Use JQuery to add events (e.g. click) to HTML elements 
+        //Output the dice faces to <div id="dice"></div>
+        //Output the list of faces for search to <div id="searchResult"></div>
+
+        $("#rollbtn").click(function () {
+            var round = $(".numberInput").val();
+            console.log("Button is clicked with " + round);
+            $("#dice").html(rollTheDice(round));
+        });
+        $("#roundSearch").click(function() {
+            var round = $("#Yay").val();
+            $("#searchResult").html(searchTheDice(round));
+        });
+    });
+
+    function rollTheDice(RoundText) {
+        var sum;
+        var i, j, faceValue, output = '', diceCount = 3;
+        var object = [];
+
+        for (j = 1; j <= RoundText; j++) {
+            sum = 0;
+            output += j + "." + "&nbsp";
+
+            var temp = {
+                "Round": j
+            }
+            for (i = 0; i < diceCount; i++) {
+                /*
+                    - Random the face of dice
+                    - Store the data into Local Storage
+                
+                */
+                var faceValue = Math.floor((Math.random() * 6));
+                temp["D"+(i+1)] = faceValue+1;
+                sum += faceValue+1;
+                output += "&#x268" + faceValue + "; "; //Get dice face
+                
+                if (sum >= 12) {
+                    console.log("Round"+ j +"-> Over 12");
+                    object.push(temp);
+                }
+                
+            }
+            output += "<br/>";
+        }
+
+        console.log(object);
+        localStorage.setItem("Score", JSON.stringify(object));
+        return output;
+    }
+
+    function searchTheDice(RoundText) {
+
+        // input: The round that you want to search for faces from Local Storage.
+
+        // output: The list of faces.
+
+        var aValue = localStorage.getItem("Score");
+        var output = "";
+        avalue = JSON.parse(aValue);
+        for (let i = 0; i < avalue.length; i++) {
+            if(RoundText == avalue[i].Round) {
+                output+= "Round number : " + avalue[i].Round+"<br>";
+                output+= "Dice 1 = " + avalue[i].D1+"<br>";
+                output+= "Dice 2 = " + avalue[i].D2+"<br>";
+                output+= "Dice 3 = " + avalue[i].D3+"<br>";
+            }
+        }
+        return output;
+    }
+</script>
